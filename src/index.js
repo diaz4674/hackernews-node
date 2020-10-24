@@ -38,6 +38,22 @@ const resolvers = {
 
 			return deletedLink[0];
 		},
+		update: (parent, args) => {
+			const { id, data } = args;
+
+			const link = links.find((link) => {
+				return link.id === id;
+			});
+
+			if (!link) {
+				throw new Error("unable to find link");
+			}
+
+			link.url = data.url;
+			link.description = data.description;
+
+			return link;
+		},
 	},
 };
 

@@ -6,10 +6,16 @@ type Query {
 type Mutation {
 	post(url: String!, description: String!): Link!
 	delete(id: ID!): Link!
+	update(id: ID!, data: UpdateDataInput!): Link!
 }
 
 type Link {
 	id: ID!
 	description: String!
 	url: String!
+}
+
+input UpdateDataInput {
+	url: String!
+	description: String!
 }
