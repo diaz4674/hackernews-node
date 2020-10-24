@@ -22,34 +22,20 @@ const resolvers = {
 			return newLink;
 		},
 
-		delete: (parent, args) => {
-			const postIndex = links.findIndex((link) => {
-				if (link.id === args.id) {
-					return true;
-				}
+		delete: (parent, args, context) => {
+			const deletedLink = context.prisma.link.delete({
+				where: { id: Number(args.id) },
 			});
 
-			if (postIndex === -1) {
-				throw new Error("link not found");
-			}
-
-			const deletedLink = links.splice(postIndex, 1);
-
-			return deletedLink[0];
+			return deletedLink;
 		},
 		update: (parent, args) => {
 			const { id, data } = args;
 
-			const link = links.find((link) => {
-				return link.id === id;
+			const link = prisma.link.update({
+				where: { id: Number(id) },
+				data,
 			});
-
-			if (!link) {
-				throw new Error("unable to find link");
-			}
-
-			link.url = data.url;
-			link.description = data.description;
 
 			return link;
 		},
