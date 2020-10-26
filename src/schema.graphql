@@ -11,6 +11,9 @@ type Mutation {
 	updateLink(id: ID!, data: UpdateDataInput!): Link!
 }
 
+type Subscription {
+	newLink: Link
+}
 type Link {
 	id: ID!
 	description: String!
