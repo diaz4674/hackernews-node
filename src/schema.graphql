@@ -9,18 +9,26 @@ type Mutation {
 	post(url: String!, description: String!): Link!
 	deleteLink(id: ID!): Link!
 	updateLink(id: ID!, data: UpdateDataInput!): Link!
+	vote(linkId: ID!): Vote
 }
 
 type Subscription {
 	newLink: Link
+	newVote: Vote
 }
 type Link {
 	id: ID!
 	description: String!
 	url: String!
 	postedBy: User
+	votes: [Vote!]!
 }
 
+type Vote {
+	id: ID!
+	link: Link!
+	user: User!
+}
 input UpdateDataInput {
 	url: String!
 	description: String!
